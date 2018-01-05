@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="js/jquery-1.6.1.min.js"></script>
+    <script type="text/javascript" src="js/jquery-test.js"></script>
+    <title>home</title>
+
+</head>
+<body>
+    <input type="button" value="jsonp请求boot" onClick="pSubmit()"> <br>
+    <ul id = "plist"></ul> <br>
+    <input type="button" value="cors请求boot" onClick="cSubmit()"> <br>
+    <ul id = "clist"></ul> <br>
+    <ul id = "glist"></ul> <br>
+</body>
+
+<!-- ajax跨域访问spring-boot实例 -->
+<script type="text/javascript">
+    function pSubmit() {
+        $.ajax({
+            url: 'http://127.0.0.1:8081/boot/web/test',
+            type: 'get',
+            dataType:'jsonp',
+            jsonp: "callback",
+            beforeSend: function() {
+                $("#plist").html('ploading...')
+            },
+            success: function(data) {
+                var json = eval(data);
+                $("#plist").html('');
+                $.each(json, function (index) {
+                    var param_name = json[index].param_name;
+                    var param_key = json[index].param_key;
+                    var param_desc = json[index].param_desc;
+                    $("#plist").html($("#plist").html() + "<br>" + param_name + "|" + param_key + "|" + param_desc + "<br/>");
+                })
+            },
+            error: function() {
+                alert("jsonp is error")
+            }
+        })
+    }
+
+    function cSubmit() {
+        $.ajax({
+            url: 'http://127.0.0.1:8081/boot/api/test',
+            type: 'get',
+            beforeSend: function() {
+                $("#clist").html('cloading...')
+            },
+            success: function(data) {
+                $("#clist").html('');
+                $("#clist").html(data);
+
+                // 普通请求url未配置cors不被支持实例
+                $.ajax({
+                    url: 'http://127.0.0.1:8081/boot/sys/index',
+                    type: 'get',
+                    beforeSend: function() {
+                        $("#glist").html('gloading...')
+                    },
+                    success: function(data) {
+                        alert('实例失败' + data);
+                    },
+                    error: function() {
+                        $("#glist").html('普通请求url未配置cors不被支持实例成功')
+                    }
+                })
+            },
+            error: function() {
+                alert("cors is error")
+            }
+        })
+    }
+</script>
+
+</html>
