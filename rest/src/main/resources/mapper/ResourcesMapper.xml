@@ -38,7 +38,28 @@
 		FROM role_resources rr WHERE rr.resourcesId=re.id AND rr.roleId=#{rid})
 		THEN 'true' ELSE 'false' END) AS checked
 		FROM resources re
-		WHERE re.parentId !=0
+-- 		WHERE re.parentId !=0
 		ORDER BY re.sort ASC
+    </select>
+
+    <select id="loadMenu1" parameterType="int" resultType="com.rest.model.MenuTempt">
+        SELECT re.id,re.name,re.parentId,re.resUrl
+        FROM resources re LEFT JOIN role_resources rr
+        ON re.id = rr.resourcesId
+        LEFT JOIN user_role ur
+        ON rr.roleId =ur.roleId
+        WHERE ur.userId=#{userId}
+            AND re.type= 1
+            AND re.parentId = 0
+        ORDER BY re.sort
+    </select>
+
+    <select id="loadMenu2" parameterType="int" resultType="com.rest.model.Resources">
+        SELECT re.id,re.name,re.parentId,re.resUrl
+        FROM resources re
+        WHERE
+          re.type= 1
+        AND re.parentId = #{parentId}
+        ORDER BY re.sort
     </select>
 </mapper>

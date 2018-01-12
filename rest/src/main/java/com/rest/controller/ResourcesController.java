@@ -1,11 +1,13 @@
 package com.rest.controller;
 
 import com.github.pagehelper.PageInfo;
+import com.rest.model.MenuTempt;
 import com.rest.model.Resources;
 import com.rest.service.ResourcesService;
 import com.rest.shiro.ShiroService;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -48,13 +50,9 @@ public class ResourcesController {
     }
 
     @RequestMapping("/loadMenu")
-    public List<Resources> loadMenu(){
-        Map<String,Object> map = new HashMap<>();
-        Integer userid = (Integer) SecurityUtils.getSubject().getSession().getAttribute("userSessionId");
-        map.put("type",1);
-        map.put("userid",userid);
-        List<Resources> resourcesList = resourcesService.loadUserResources(map);
-        return resourcesList;
+    public String loadMenu(){
+        Integer userId = (Integer) SecurityUtils.getSubject().getSession().getAttribute("userSessionId");
+        return resourcesService.loadMenu(userId);
     }
 
     @CacheEvict(cacheNames="resources", allEntries=true)
