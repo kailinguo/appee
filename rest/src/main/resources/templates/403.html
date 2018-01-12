@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+    <link rel="stylesheet" th:href="@{/css/matrix-style.css}" />
+    <link rel="stylesheet" th:href="@{/css/matrix-media.css}" />
+    <link th:href="@{/font-awesome/css/font-awesome.css}" rel="stylesheet" />
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
+    <link th:href="@{/css/style.css}" rel="stylesheet" />
+    <link th:href="@{/css/plugins/iCheck/custom.css}" rel="stylesheet"/>
+    <link th:href="@{/css/plugins/footable/footable.core.css}" rel="stylesheet"/>
+
+    <title>403</title>
+
+    <!-- Mainly scripts -->
+    <script th:src="@{/js/jquery-2.1.1.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/plugins/metisMenu/jquery.metisMenu.js}"></script>
+    <script th:src="@{/js/plugins/slimscroll/jquery.slimscroll.min.js}"></script>
+
+    <!-- Peity -->
+    <script th:src="@{/js/plugins/peity/jquery.peity.min.js}"></script>
+
+    <!-- Custom and plugin javascript -->
+    <script th:src="@{/js/inspinia.js}"></script>
+    <script th:src="@{/js/plugins/pace/pace.min.js}"></script>
+
+    <!-- iCheck -->
+    <script th:src="@{/js/plugins/iCheck/icheck.min.js}"></script>
+
+    <!-- Peity -->
+    <script th:src="@{/js/demo/peity-demo.js}"></script>
+
+    <!-- FooTable -->
+    <script th:src="@{/js/plugins/footable/footable.all.min.js}"></script>
+    <script th:src="@{/js/layer.js}"></script>
+</head>
+<body>
+
+<div id="wrapper">
+    <nav class="navbar-default navbar-static-side" role="navigation" th:include="common/menu :: menu"></nav>
+    <div id="page-wrapper" class="gray-bg">
+        <div class="border-bottom" th:include="common/top :: top"></div>
+
+        <div class="row wrapper border-bottom white-bg page-heading" th:fragment="headerNav">
+            <div class="col-lg-10">
+                <h2>403</h2>
+                <ol class="breadcrumb">
+                    <li>
+                        <a href="#">首页</a>
+                    </li>
+                    <li class="active">
+                        <strong>403</strong>
+                    </li>
+                </ol>
+            </div>
+            <div class="col-lg-2">
+            </div>
+        </div>
+
+        <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="error_ex">
+                            <h1>403</h1>
+                            <h3>Opps, You're lost.</h3>
+                            <p>Access to this page is forbidden</p>
+                            <a class="btn btn-warning btn-big"  href="/login">Back to Home</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer" th:include="common/footer :: foot"></div>
+</div>
+
+</body>
+</html>
