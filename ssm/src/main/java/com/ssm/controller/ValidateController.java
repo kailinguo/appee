@@ -12,7 +12,7 @@ import java.io.IOException;
  * Created by KaiLin.Guo on 2017-12-29.
  */
 @Controller
-@RequestMapping("/validate")
+@RequestMapping("/ssm/validate")
 public class ValidateController {
 
     @RequestMapping(value = "/code")

@@ -145,6 +145,21 @@
       <artifactId>commons-codec</artifactId>
       <version>1.9</version>
     </dependency>
+      <dependency>
+          <groupId>org.aspectj</groupId>
+          <artifactId>aspectjrt</artifactId>
+          <version>1.7.4</version>
+      </dependency>
+    <dependency>
+      <groupId>org.aspectj</groupId>
+      <artifactId>aspectjweaver</artifactId>
+      <version>1.8.7</version>
+    </dependency>
+    <dependency>
+      <groupId>net.sf.json-lib</groupId>
+      <artifactId>json-lib</artifactId>
+      <version>RELEASE</version>
+    </dependency>
   </dependencies>
   <build>
     <finalName>ssm</finalName>
