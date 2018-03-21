@@ -10,6 +10,8 @@ import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.LocalVariableTableParameterNameDiscoverer;
+import org.springframework.core.ParameterNameDiscoverer;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -19,6 +21,8 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by KaiLin.Guo on 2018-03-20.
@@ -130,8 +134,27 @@ public class BussiLogAspect {
     private String getServiceMthodParams(JoinPoint joinPoint)
             throws Exception {
         Object[] arguments = joinPoint.getArgs();
-        String params = JSONArray.fromObject(arguments).toString();
-        return params;
+        ParameterNameDiscoverer parameterNameDiscoverer = new LocalVariableTableParameterNameDiscoverer();
+        String[] parameterNames = {};
+        String targetName = joinPoint.getTarget().getClass().getName();
+        String methodName = joinPoint.getSignature().getName();
+        Class targetClass = Class.forName(targetName);
+        Method[] methods = targetClass.getMethods();
+        for (Method method : methods) {
+            if (method.getName().equals(methodName)) {
+                Class[] clazzs = method.getParameterTypes();
+                if (clazzs.length == arguments.length) {
+                    parameterNames = parameterNameDiscoverer.getParameterNames(method);
+                    break;
+                }
+            }
+        }
+        Map<String,Object> map = new HashMap<String,Object>();
+        for (int i = 0; i < parameterNames.length; i++) {
+            map.put(parameterNames[i], arguments[i]);
+        }
+        // 若参数为业务类，务必重写toString方法以便记录日志时可将具体字段值记下
+        return map.toString();
     }
 
 }

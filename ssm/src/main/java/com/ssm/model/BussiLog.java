@@ -67,4 +67,16 @@ public class BussiLog {
     public void setCreatedTime(Date createdTime) {
         this.createdTime = createdTime;
     }
+
+    @Override
+    public String toString() {
+        return "BussiLog{" +
+                "id=" + id +
+                ", tableNo=" + tableNo +
+                ", opUser='" + opUser + '\'' +
+                ", remark='" + remark + '\'' +
+                ", content='" + content + '\'' +
+                ", createdTime=" + createdTime +
+                '}';
+    }
 }
