@@ -10,6 +10,7 @@
                         http://www.springframework.org/schema/mvc
                         http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
+    <mvc:annotation-driven/>
 <!-- 自动扫描  @Controller-->
     <context:component-scan base-package="com.ssm.controller"/>
     <!-- 启动对@AspectJ注解的支持  -->
@@ -17,6 +18,10 @@
     <!-- 自动扫描包路径  -->
     <context:component-scan base-package="com.ssm.common.aop" />
     <context:component-scan base-package="com.ssm.service" />
+
+    <mvc:default-servlet-handler />
+    <mvc:resources mapping="/js/**" location="/js/" />
+    <mvc:resources mapping="/styles/**" location="/styles/" />
 
     <!--避免IE执行AJAX时，返回JSON出现下载文件 -->
     <bean id="mappingJacksonHttpMessageConverter"
@@ -36,12 +41,13 @@
         </property>
     </bean>
 
-
     <!-- 定义跳转的文件的前后缀 ，视图模式配置 -->
-    <!--<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">-->
-        <!--<property name="prefix" value="/WEB-INF/" />-->
-        <!--<property name="suffix" value=".jsp"/>-->
-    <!--</bean>-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass"
+                  value="org.springframework.web.servlet.view.JstlView" />
+        <property name="prefix" value="/view/" />
+        <property name="suffix" value=".html" />
+    </bean>
 
     <!-- 文件上传配置 -->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
