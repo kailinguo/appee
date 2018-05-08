@@ -203,6 +203,9 @@ public class ShiroConfig {
     @Bean
     public DefaultWebSessionManager sessionManager() {
         DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
+        // 解决退出重定向时url显示jsessionid问题
+        sessionManager.setSessionIdUrlRewritingEnabled(false);
+        // 将jsessionid写入redis，退出时清空，但是重定向后会写入新的jsessionid
         sessionManager.setSessionDAO(redisSessionDAO());
         return sessionManager;
     }
