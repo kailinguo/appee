@@ -17,6 +17,7 @@
     <aop:aspectj-autoproxy proxy-target-class="true" />
     <!-- 自动扫描包路径  -->
     <context:component-scan base-package="com.ssm.common.aop" />
+    <context:component-scan base-package="com.ssm.common.pdf" />
     <context:component-scan base-package="com.ssm.service" />
 
     <mvc:default-servlet-handler />
@@ -32,6 +33,10 @@
             </list>
         </property>
     </bean>
+
+    <!-- pdf -->
+    <bean class="com.ssm.common.pdf.FlyingSaucerPdf"/>
+
     <!-- 启动SpringMVC的注解功能，完成请求和注解POJO的映射 -->
     <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
         <property name="messageConverters">

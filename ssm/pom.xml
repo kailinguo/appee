@@ -21,6 +21,13 @@
   </properties>
 
   <dependencies>
+    <!-- pdf生成 -->
+    <dependency>
+      <groupId>org.xhtmlrenderer</groupId>
+      <artifactId>flying-saucer-pdf</artifactId>
+      <version>9.0.7</version>
+    </dependency>
+
     <dependency>
       <groupId>jstl</groupId>
       <artifactId>jstl</artifactId>
