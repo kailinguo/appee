@@ -16,6 +16,13 @@
     <input type="button" value="cors请求boot" onClick="cSubmit()"> <br>
     <ul id = "clist"></ul> <br>
     <ul id = "glist"></ul> <br>
+
+    <form action="/ssm/file/upload" enctype="multipart/form-data" method="post">
+         上传用户：<input type="text" name="username"><br/>
+         上传文件1：<input type="file" name="file"><br/>
+         上传文件2：<input type="file" name="file"><br/>
+         <input type="submit" value="提交">
+     </form>
 </body>
 
 <!-- ajax跨域访问spring-boot实例 -->
